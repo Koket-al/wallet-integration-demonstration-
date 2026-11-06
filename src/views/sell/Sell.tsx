@@ -12,9 +12,11 @@ import {
 import PlaceIcon from "@mui/icons-material/Place";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import Text1 from "../../components/text/Text1";
+import { PaymentVaultCard, useWeb3 } from "../../web3";
 
 const Sell = () => {
   const theme = useTheme();
+  const { account } = useWeb3();
 
   return (
     <Box>
@@ -198,9 +200,15 @@ const Sell = () => {
                 Seller Address
               </Typography>
               <Typography
-                sx={{ fontSize: "20px", color: "#162f38", fontWeight: 400 }}
+                sx={{
+                  fontSize: "18px",
+                  color: "#162f38",
+                  fontWeight: 500,
+                  fontFamily: "monospace",
+                  wordBreak: "break-all"
+                }}
               >
-                Seller wallet address
+                {account ? `${account} (Connected)` : "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"}
               </Typography>
             </Box>
             <Box sx={{ margin: "20px" }}>
@@ -248,6 +256,9 @@ const Sell = () => {
               sx={{ fontSize: "32px", color: "#00dbe3" }}
             />
           </Button>
+
+          {/* Web3 Smart Contract Vault Integration */}
+          <PaymentVaultCard />
         </Box>
       </Box>
     </Box>

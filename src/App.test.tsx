@@ -1,9 +1,22 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import { store } from './store/store';
+import { Web3Provider } from './web3';
+import { Header } from './components/header';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test('renders Header with Connect Wallet button', () => {
+  render(
+    <Provider store={store}>
+      <BrowserRouter>
+        <Web3Provider>
+          <Header />
+        </Web3Provider>
+      </BrowserRouter>
+    </Provider>
+  );
+
+  const connectButton = screen.getByText(/Connect Wallet/i);
+  expect(connectButton).toBeInTheDocument();
 });
